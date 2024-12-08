@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>NTFY Trigger Project :: </title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="NTFY is a lightweight, self-hosted notification service that enables easy push notifications through simple HTTP requests. Ideal for personal projects and small-scale alerting, it offers full control over your data and security. NTFY is highly customizable, cross-platform, and perfect for seamless integration into scripts and applications.
+NTFY Server Setup This setup is valid for any machine connected to same network as the ESP module with a static or dynamic IP address. There is a minute difference for setting up NTFY for static and dynamic addresses. For now, I will focus on setting it up with static IP address.
+" />
+<meta name="keywords" content="" />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="/posts/ntfy-trigger-project-documentation/" />
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/styles.css">
+
+
+
+
+
+
+
+  <link rel="shortcut icon" href="/img/theme-colors/green.png">
+  <link rel="apple-touch-icon" href="/img/theme-colors/green.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+  
+    <meta name="twitter:site" content="" />
+  
+    <meta name="twitter:creator" content="" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="NTFY Trigger Project">
+<meta property="og:description" content="NTFY is a lightweight, self-hosted notification service that enables easy push notifications through simple HTTP requests. Ideal for personal projects and small-scale alerting, it offers full control over your data and security. NTFY is highly customizable, cross-platform, and perfect for seamless integration into scripts and applications.
+NTFY Server Setup This setup is valid for any machine connected to same network as the ESP module with a static or dynamic IP address. There is a minute difference for setting up NTFY for static and dynamic addresses. For now, I will focus on setting it up with static IP address.
+" />
+<meta property="og:url" content="/posts/ntfy-trigger-project-documentation/" />
+<meta property="og:site_name" content="" />
+
+  
+    <meta property="og:image" content="/img/favicon/green.png">
+  
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+  <meta property="article:published_time" content="2024-12-08 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+</head>
+<body class="green">
+
+
+
+
+<div class="container center headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    Async-Blogs
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="https://portfolio.asyncsunlight.me/">portfolio</a></li>
+        
+      
+        
+          <li><a href="/showcase">Showcase</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+      
+        
+          <li><a href="https://portfolio.asyncsunlight.me/" >portfolio</a></li>
+        
+      
+        
+          <li><a href="/showcase" >Showcase</a></li>
+        
+      
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="/posts/ntfy-trigger-project-documentation/">NTFY Trigger Project</a>
+  </h1>
+  <div class="post-meta"><time class="post-date">2024-12-08</time>
+    
+</div>
+
+  
+    <span class="post-tags">
+      
+      #<a href="/tags/ntfy/">NTFY</a>&nbsp;
+      
+      #<a href="/tags/trigger/">Trigger</a>&nbsp;
+      
+      #<a href="/tags/esp32/">ESP32</a>&nbsp;
+      
+    </span>
+  
+  
+
+
+
+  
+
+  <div class="post-content"><div>
+        <p>NTFY is a lightweight, self-hosted notification service that enables easy push notifications through simple HTTP requests. Ideal for personal projects and small-scale alerting, it offers full control over your data and security. NTFY is highly customizable, cross-platform, and perfect for seamless integration into scripts and applications.</p>
+<h2 id="ntfy-server-setup">NTFY Server Setup<a href="#ntfy-server-setup" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>This setup is valid for any machine connected to same network as the ESP module with a static or dynamic IP address. There is a minute difference for setting up NTFY for static and dynamic addresses. For now, I will focus on setting it up with static IP address.</p>
+<h3 id="install-requirements">Install requirements<a href="#install-requirements" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<p>Run the following commands in terminal to install wget, sed, Docker on the machine.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt install wget
+</span></span><span style="display:flex;"><span>sudo apt install sed
+</span></span><span style="display:flex;"><span>sudo apt install docker.io
+</span></span></code></pre></div><p>You can also simply procced to next by uncommenting some lines of <code>docker_setup.sh</code> as mentioned in the same.</p>
+<h3 id="download-setup-file">Download Setup file<a href="#download-setup-file" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<p>Run the following command in terminal of NTFY host machine to download the setup file.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>wget -O ntfy_docker_setup.sh https://raw.githubusercontent.com/Su-nlight/mini-projects/main/ntfy-trigger/docker_setup.sh
+</span></span></code></pre></div><p><strong>Note</strong> : If you skipped previous step uncomment lines 9 to 11. This can be done using you choice of text editor [i.e., vim, nano and cat (if you are feeling adventurous)] .</p>
+<p>you can also use actual <code>server.yml</code> file as made by NTFY&rsquo;s creator by uncommenting line 16 &amp; line 21 and commenting out line 17. [This solution is for those who don&rsquo;t trust me even a little bit, as I do not have a very good reputation among my colleagues.]</p>
+<p>As mentioned in the <code>docker_setup.sh</code> file itself you can change the external port binding (host machine&rsquo;s) as per your wish by changing the value <code>2500</code> (line 30 of same file) to any value (according to your machine condition) you desire.</p>
+<h3 id="final-container-creation">Final Container Creation<a href="#final-container-creation" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<p>Run the following command mentioned and relax for it to complete if requirements are already fulfilled the script will be completed in a few instant.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo chmod +x ntfy_docker_setup.sh
+</span></span><span style="display:flex;"><span>sudo ./ntfy_docker_setup.sh
+</span></span></code></pre></div><p><code>&quot;Time for a coffee break...&quot;</code> - <a href="https://www.instagram.com/networkchuck">Network Chuck</a></p>
+<h3 id="configuring-ntfy-on-device">Configuring NTFY on device<a href="#configuring-ntfy-on-device" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<p>NTFY can be installed on both iOS devices and android from respective app stores. After install, follow following step in sequence.</p>
+<pre><code>1. Click ⋮ at top right corner of the NTFY home screen and Go to settings.
+2. Click on &quot;Default Server&quot; option.
+3. Add the url of NTFY serving machiene with port to this.
+4. Now at the homescreen subscribe to the topic you wish to.
+</code></pre>
+<p>To test this simply from the shell of NTFY host machiene enter the following command. This publishes a simple message using a POST request.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -d <span style="color:#e6db74">&#34;Test message as you wish dear&#34;</span> ipaddress:port/mytopic
+</span></span></code></pre></div><h2 id="ntfy-triggers-presets">NTFY Triggers presets<a href="#ntfy-triggers-presets" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>NTFY triggers are automated events that initiate notifications based on specific conditions or actions. By configuring triggers, you can set up NTFY to send alerts when certain thresholds are met, such as server downtime, application errors, or system performance issues. Triggers are highly customizable, allowing for real-time monitoring and immediate response to critical events. This makes NTFY an effective tool for ensuring timely notifications and enhancing system reliability.</p>
+<h3 id="ntfy-api-reference">NTFY API Reference<a href="#ntfy-api-reference" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<h4 id="example-http-call">Example HTTP call<a href="#example-http-call" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-http" data-lang="http"><span style="display:flex;"><span><span style="color:#a6e22e">POST</span> /phil_alerts <span style="color:#66d9ef">HTTP</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1.1</span>
+</span></span><span style="display:flex;"><span>Host<span style="color:#f92672">:</span> <span style="color:#ae81ff">ntfy.sh</span>
+</span></span><span style="display:flex;"><span>Title<span style="color:#f92672">:</span> <span style="color:#ae81ff">Unauthorized access detected</span>
+</span></span><span style="display:flex;"><span>Priority<span style="color:#f92672">:</span> <span style="color:#ae81ff">urgent</span>
+</span></span><span style="display:flex;"><span>Tags<span style="color:#f92672">:</span> <span style="color:#ae81ff">warning,skull</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Remote access to phils-laptop detected. Act right away.
+</span></span></code></pre></div><h4 id="list-of-all-parameters">List of all parameters<a href="#list-of-all-parameters" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h4>
+<p>The following is a list of all parameters that can be passed when publishing a message. Parameter names are case-insensitive when used in HTTP headers, and must be lowercase when used as query parameters in the URL. They are listed in the table in their canonical form.<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">Parameter</th>
+          <th style="text-align: left">Aliases</th>
+          <th style="text-align: left">Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><code>X-Message</code></td>
+          <td style="text-align: left"><code>Message</code>,<code>m</code></td>
+          <td style="text-align: left">Main body of the message as shown in the notification</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>X-Title</code></td>
+          <td style="text-align: left"><code>Title</code>,<code>t</code></td>
+          <td style="text-align: left">Message Title</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>X-Priority</code></td>
+          <td style="text-align: left"><code>Priority</code>,<code>prio</code>,<code>p</code></td>
+          <td style="text-align: left">Message Priority</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>X-Tags</code></td>
+          <td style="text-align: left"><code>Tags</code>,<code>tag</code>,<code>ta</code></td>
+          <td style="text-align: left">Tags and emoji</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>X-Delay</code></td>
+          <td style="text-align: left"><code>Delay</code>, <code>X-At</code>,<code>At</code>, <code>X-In</code> , <code>In</code></td>
+          <td style="text-align: left">Timestamp or duration for delayed delivery</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>X-Actions</code></td>
+          <td style="text-align: left"><code>Actions</code>,<code>Action</code></td>
+          <td style="text-align: left">JSON array or short format of user actions</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>X-Click</code></td>
+          <td style="text-align: left"><code>Click</code></td>
+          <td style="text-align: left">URL to open when notification is clicked</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>X-Attach</code></td>
+          <td style="text-align: left"><code>Attach</code> , <code>a</code></td>
+          <td style="text-align: left">URL to send as an attachment, as an alternative to PUT/POST-ing an attachment</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>X-Markdown</code></td>
+          <td style="text-align: left"><code>Markdown</code> , <code>md</code></td>
+          <td style="text-align: left">Enable Markdown formatting in the notification body</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>X-Icon</code></td>
+          <td style="text-align: left"><code>Icon</code></td>
+          <td style="text-align: left">URL to use as notification icon</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>X-Filename</code></td>
+          <td style="text-align: left"><code>Filename</code> , <code>file</code> , <code>f</code></td>
+          <td style="text-align: left">Optional attachment filename, as it appears in the client</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>X-Email</code></td>
+          <td style="text-align: left"><code>X-E-Mail</code> , <code>Email</code> , <code>E-Mail</code> , <code>mail</code> , <code>e</code></td>
+          <td style="text-align: left">E-mail address for e-mail notifications</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>X-Call</code></td>
+          <td style="text-align: left"><code>Call</code></td>
+          <td style="text-align: left">Phone number for phone calls</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>X-Cache</code></td>
+          <td style="text-align: left"><code>Cache</code></td>
+          <td style="text-align: left">Allows disabling message caching</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>X-Firebase</code></td>
+          <td style="text-align: left"><code>Firebase</code></td>
+          <td style="text-align: left">Allows disabling sending to Firebase</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>X-UnifiedPush</code></td>
+          <td style="text-align: left"><code>UnifiedPush</code> , <code>up</code></td>
+          <td style="text-align: left">UnifiedPush publish option, only to be used by UnifiedPush apps</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>X-Poll-ID</code></td>
+          <td style="text-align: left"><code>Poll-ID</code></td>
+          <td style="text-align: left">Internal parameter, used for iOS push notifications</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>Authorization</code></td>
+          <td style="text-align: left">-</td>
+          <td style="text-align: left">If supported by the server, you can login to access protected topics</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>Content-Type</code></td>
+          <td style="text-align: left"><code>-</code></td>
+          <td style="text-align: left">If set to <code>text/markdown</code> , Markdown formatting is enabled</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="esp-module-configurations">ESP module configurations<a href="#esp-module-configurations" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<p>The ESP32 is a powerful, low-cost microcontroller with built-in Wi-Fi and Bluetooth capabilities, widely used in IoT projects. It features a dual-core processor, multiple GPIO pins, and supports various communication protocols, making it versatile for a range of applications. The ESP32 is popular for its robust performance, energy efficiency, and the ability to handle complex tasks like real-time data processing and wireless communication.</p>
+<h4 id="module-connections">Module connections<a href="#module-connections" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h4>
+<p>This project is made as a reference and ready to burn code of the presets for NTFY service using <code>ESP32</code> or <code>ESP8266</code>. The ESP development board has inbuilt wifi and bluetooth modules and has higher clock speed than arduino boards making it capable for such an application. This project uses <code>KY-022</code> infrared reciever module connected to ESP as per following pin scheme.</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center">ESP GPIO PIN</th>
+          <th style="text-align: center">KY-022 PIN</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">GPIO 15</td>
+          <td style="text-align: center">data / <code>S</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">3.3v</td>
+          <td style="text-align: center">+vcc</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">GND</td>
+          <td style="text-align: center">-vsat</td>
+      </tr>
+  </tbody>
+</table>
+<h4 id="code-upload-to-esp">Code upload to ESP<a href="#code-upload-to-esp" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h4>
+<p>Nextly, open Arduino IDE and create new sketch, now add the code that is in <a href="https://github.com/Su-nlight/mini-projects/blob/main/ntfy-trigger/esp32-ntfy-presets.ino">esp32-ntfy-presets.ino</a>.</p>
+<p><strong>Note</strong> : I assume that appropriate board are added, if not then follow <a href="https://randomnerdtutorials.com/installing-the-esp32-board-in-arduino-ide-windows-instructions">this tutorial</a>. Further select ESP board and port of comuter to which it is connected (Appropriate drivers must be installed beforehand for serial communication)</p>
+<p>Now you can configure the Switch case as per the remote youhave and its hex codes of that remote. Take assistance of the <a href="/posts/ntfy-trigger-project-documentation/#NTFY-API-Reference">NTFY API Reference</a> and make it as per your requirement, this is all upto your coding.</p>
+<h2 id="conclusion">Conclusion<a href="#conclusion" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>The &ldquo;ntfy-trigger&rdquo; project in this GitHub repository is a tool designed to automate and manage notifications using the NTFY service. It allows users to set up triggers that monitor specific events or conditions, automatically sending alerts when these criteria are met. The project integrates seamlessly with NTFY, providing a lightweight solution for real-time monitoring and notifications. With customizable triggers and notification parameters, &ldquo;ntfy-trigger&rdquo; is ideal for developers and enthusiasts seeking to implement efficient, automated alert systems in their projects. This makes it especially useful for small-scale applications, personal projects, or any scenario requiring timely notifications.</p>
+
+      </div></div>
+
+  
+    
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright copyright--user">
+        <span>&copy; 2025 Sumit Sharma (Async_Sunlight)</span>
+    
+      
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>
