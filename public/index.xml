@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title></title>
+    <link>/</link>
+    <description>Recent content on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 08 Dec 2024 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>NTFY Trigger Project</title>
+      <link>/posts/ntfy-trigger-project-documentation/</link>
+      <pubDate>Sun, 08 Dec 2024 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/ntfy-trigger-project-documentation/</guid>
+      <description>&lt;p&gt;NTFY is a lightweight, self-hosted notification service that enables easy push notifications through simple HTTP requests. Ideal for personal projects and small-scale alerting, it offers full control over your data and security. NTFY is highly customizable, cross-platform, and perfect for seamless integration into scripts and applications.&lt;/p&gt;
+&lt;h2 id=&#34;ntfy-server-setup&#34;&gt;NTFY Server Setup&lt;/h2&gt;
+&lt;p&gt;This setup is valid for any machine connected to same network as the ESP module with a static or dynamic IP address. There is a minute difference for setting up NTFY for static and dynamic addresses. For now, I will focus on setting it up with static IP address.&lt;/p&gt;</description>
+      <content>&lt;p&gt;NTFY is a lightweight, self-hosted notification service that enables easy push notifications through simple HTTP requests. Ideal for personal projects and small-scale alerting, it offers full control over your data and security. NTFY is highly customizable, cross-platform, and perfect for seamless integration into scripts and applications.&lt;/p&gt;
+&lt;h2 id=&#34;ntfy-server-setup&#34;&gt;NTFY Server Setup&lt;/h2&gt;
+&lt;p&gt;This setup is valid for any machine connected to same network as the ESP module with a static or dynamic IP address. There is a minute difference for setting up NTFY for static and dynamic addresses. For now, I will focus on setting it up with static IP address.&lt;/p&gt;
+&lt;h3 id=&#34;install-requirements&#34;&gt;Install requirements&lt;/h3&gt;
+&lt;p&gt;Run the following commands in terminal to install wget, sed, Docker on the machine.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo apt install wget
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo apt install sed
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo apt install docker.io
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You can also simply procced to next by uncommenting some lines of &lt;code&gt;docker_setup.sh&lt;/code&gt; as mentioned in the same.&lt;/p&gt;
+&lt;h3 id=&#34;download-setup-file&#34;&gt;Download Setup file&lt;/h3&gt;
+&lt;p&gt;Run the following command in terminal of NTFY host machine to download the setup file.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;wget -O ntfy_docker_setup.sh https://raw.githubusercontent.com/Su-nlight/mini-projects/main/ntfy-trigger/docker_setup.sh
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; : If you skipped previous step uncomment lines 9 to 11. This can be done using you choice of text editor [i.e., vim, nano and cat (if you are feeling adventurous)] .&lt;/p&gt;
+&lt;p&gt;you can also use actual &lt;code&gt;server.yml&lt;/code&gt; file as made by NTFY&amp;rsquo;s creator by uncommenting line 16 &amp;amp; line 21 and commenting out line 17. [This solution is for those who don&amp;rsquo;t trust me even a little bit, as I do not have a very good reputation among my colleagues.]&lt;/p&gt;
+&lt;p&gt;As mentioned in the &lt;code&gt;docker_setup.sh&lt;/code&gt; file itself you can change the external port binding (host machine&amp;rsquo;s) as per your wish by changing the value &lt;code&gt;2500&lt;/code&gt; (line 30 of same file) to any value (according to your machine condition) you desire.&lt;/p&gt;
+&lt;h3 id=&#34;final-container-creation&#34;&gt;Final Container Creation&lt;/h3&gt;
+&lt;p&gt;Run the following command mentioned and relax for it to complete if requirements are already fulfilled the script will be completed in a few instant.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo chmod +x ntfy_docker_setup.sh
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo ./ntfy_docker_setup.sh
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;&amp;quot;Time for a coffee break...&amp;quot;&lt;/code&gt; - &lt;a href=&#34;https://www.instagram.com/networkchuck&#34;&gt;Network Chuck&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;configuring-ntfy-on-device&#34;&gt;Configuring NTFY on device&lt;/h3&gt;
+&lt;p&gt;NTFY can be installed on both iOS devices and android from respective app stores. After install, follow following step in sequence.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1. Click ⋮ at top right corner of the NTFY home screen and Go to settings.
+2. Click on &amp;quot;Default Server&amp;quot; option.
+3. Add the url of NTFY serving machiene with port to this.
+4. Now at the homescreen subscribe to the topic you wish to.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To test this simply from the shell of NTFY host machiene enter the following command. This publishes a simple message using a POST request.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl -d &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Test message as you wish dear&amp;#34;&lt;/span&gt; ipaddress:port/mytopic
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;ntfy-triggers-presets&#34;&gt;NTFY Triggers presets&lt;/h2&gt;
+&lt;p&gt;NTFY triggers are automated events that initiate notifications based on specific conditions or actions. By configuring triggers, you can set up NTFY to send alerts when certain thresholds are met, such as server downtime, application errors, or system performance issues. Triggers are highly customizable, allowing for real-time monitoring and immediate response to critical events. This makes NTFY an effective tool for ensuring timely notifications and enhancing system reliability.&lt;/p&gt;
+&lt;h3 id=&#34;ntfy-api-reference&#34;&gt;NTFY API Reference&lt;/h3&gt;
+&lt;h4 id=&#34;example-http-call&#34;&gt;Example HTTP call&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;POST&lt;/span&gt; /phil_alerts &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;ntfy.sh&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Title&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;Unauthorized access detected&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Priority&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;urgent&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Tags&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;warning,skull&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Remote access to phils-laptop detected. Act right away.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;list-of-all-parameters&#34;&gt;List of all parameters&lt;/h4&gt;
+&lt;p&gt;The following is a list of all parameters that can be passed when publishing a message. Parameter names are case-insensitive when used in HTTP headers, and must be lowercase when used as query parameters in the URL. They are listed in the table in their canonical form.&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;Parameter&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;Aliases&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;Description&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;X-Message&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;Message&lt;/code&gt;,&lt;code&gt;m&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Main body of the message as shown in the notification&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;X-Title&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;Title&lt;/code&gt;,&lt;code&gt;t&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Message Title&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;X-Priority&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;Priority&lt;/code&gt;,&lt;code&gt;prio&lt;/code&gt;,&lt;code&gt;p&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Message Priority&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;X-Tags&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;Tags&lt;/code&gt;,&lt;code&gt;tag&lt;/code&gt;,&lt;code&gt;ta&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Tags and emoji&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;X-Delay&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;Delay&lt;/code&gt;, &lt;code&gt;X-At&lt;/code&gt;,&lt;code&gt;At&lt;/code&gt;, &lt;code&gt;X-In&lt;/code&gt; , &lt;code&gt;In&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Timestamp or duration for delayed delivery&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;X-Actions&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;Actions&lt;/code&gt;,&lt;code&gt;Action&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;JSON array or short format of user actions&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;X-Click&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;Click&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;URL to open when notification is clicked&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;X-Attach&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;Attach&lt;/code&gt; , &lt;code&gt;a&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;URL to send as an attachment, as an alternative to PUT/POST-ing an attachment&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;X-Markdown&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;Markdown&lt;/code&gt; , &lt;code&gt;md&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Enable Markdown formatting in the notification body&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;X-Icon&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;Icon&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;URL to use as notification icon&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;X-Filename&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;Filename&lt;/code&gt; , &lt;code&gt;file&lt;/code&gt; , &lt;code&gt;f&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Optional attachment filename, as it appears in the client&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;X-Email&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;X-E-Mail&lt;/code&gt; , &lt;code&gt;Email&lt;/code&gt; , &lt;code&gt;E-Mail&lt;/code&gt; , &lt;code&gt;mail&lt;/code&gt; , &lt;code&gt;e&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;E-mail address for e-mail notifications&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;X-Call&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;Call&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Phone number for phone calls&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;X-Cache&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;Cache&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Allows disabling message caching&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;X-Firebase&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;Firebase&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Allows disabling sending to Firebase&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;X-UnifiedPush&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;UnifiedPush&lt;/code&gt; , &lt;code&gt;up&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;UnifiedPush publish option, only to be used by UnifiedPush apps&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;X-Poll-ID&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;Poll-ID&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Internal parameter, used for iOS push notifications&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;Authorization&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;-&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;If supported by the server, you can login to access protected topics&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;Content-Type&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;-&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;If set to &lt;code&gt;text/markdown&lt;/code&gt; , Markdown formatting is enabled&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;esp-module-configurations&#34;&gt;ESP module configurations&lt;/h3&gt;
+&lt;p&gt;The ESP32 is a powerful, low-cost microcontroller with built-in Wi-Fi and Bluetooth capabilities, widely used in IoT projects. It features a dual-core processor, multiple GPIO pins, and supports various communication protocols, making it versatile for a range of applications. The ESP32 is popular for its robust performance, energy efficiency, and the ability to handle complex tasks like real-time data processing and wireless communication.&lt;/p&gt;
+&lt;h4 id=&#34;module-connections&#34;&gt;Module connections&lt;/h4&gt;
+&lt;p&gt;This project is made as a reference and ready to burn code of the presets for NTFY service using &lt;code&gt;ESP32&lt;/code&gt; or &lt;code&gt;ESP8266&lt;/code&gt;. The ESP development board has inbuilt wifi and bluetooth modules and has higher clock speed than arduino boards making it capable for such an application. This project uses &lt;code&gt;KY-022&lt;/code&gt; infrared reciever module connected to ESP as per following pin scheme.&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;ESP GPIO PIN&lt;/th&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;KY-022 PIN&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;GPIO 15&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;data / &lt;code&gt;S&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;3.3v&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;+vcc&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;GND&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;-vsat&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4 id=&#34;code-upload-to-esp&#34;&gt;Code upload to ESP&lt;/h4&gt;
+&lt;p&gt;Nextly, open Arduino IDE and create new sketch, now add the code that is in &lt;a href=&#34;https://github.com/Su-nlight/mini-projects/blob/main/ntfy-trigger/esp32-ntfy-presets.ino&#34;&gt;esp32-ntfy-presets.ino&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; : I assume that appropriate board are added, if not then follow &lt;a href=&#34;https://randomnerdtutorials.com/installing-the-esp32-board-in-arduino-ide-windows-instructions&#34;&gt;this tutorial&lt;/a&gt;. Further select ESP board and port of comuter to which it is connected (Appropriate drivers must be installed beforehand for serial communication)&lt;/p&gt;
+&lt;p&gt;Now you can configure the Switch case as per the remote youhave and its hex codes of that remote. Take assistance of the &lt;a href=&#34;/posts/ntfy-trigger-project-documentation/#NTFY-API-Reference&#34;&gt;NTFY API Reference&lt;/a&gt; and make it as per your requirement, this is all upto your coding.&lt;/p&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;The &amp;ldquo;ntfy-trigger&amp;rdquo; project in this GitHub repository is a tool designed to automate and manage notifications using the NTFY service. It allows users to set up triggers that monitor specific events or conditions, automatically sending alerts when these criteria are met. The project integrates seamlessly with NTFY, providing a lightweight solution for real-time monitoring and notifications. With customizable triggers and notification parameters, &amp;ldquo;ntfy-trigger&amp;rdquo; is ideal for developers and enthusiasts seeking to implement efficient, automated alert systems in their projects. This makes it especially useful for small-scale applications, personal projects, or any scenario requiring timely notifications.&lt;/p&gt;
+</content>
+    </item>
+    
+  </channel>
+</rss>
